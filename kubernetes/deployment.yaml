@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-config-k8s
+data:
+  application.yml: |-
+    greeting:
+      message: Message from ConfigMap.yaml - New
+      message1: Message 1 from ConfigMap.yaml - New
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-config-k8s-service
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: spring-boot-config-k8s
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-boot-config-k8s
+  name: spring-boot-config-k8s-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-config-k8s
+  template:
+    metadata:
+      labels:
+        app: spring-boot-config-k8s
+    spec:
+      containers:
+      - image: hmanikkothu/spring-boot-config-k8s:latest
+        name: spring-boot-config-k8s
+        ports:
+          - containerPort: 8080
+      serviceAccountName: "config-reader"

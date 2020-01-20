@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-config-k8s
+data:
+  application.yml: |-
+    greeting:
+      message: Message from ConfigMap.yaml - Updated live..
+      message1: Message 1 from ConfigMap.yaml - Updated live..
+    service:
+      message: New msg from CM ...
+      message1: New msg1 from CM ...

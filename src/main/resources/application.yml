@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-boot-config-k8s
+  cloud:
+    kubernetes:      
+      reload:
+        enabled: true
+management:
+  endpoint:
+    refresh:      
+      enabled: true
+    restart:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+greeting:
+  message: Default Message from application.yml
+  message1: Default Message1 from application.yml
+service:
+  message: Defaulte service.message from application.yml
+  message1: Defaulte service.message1 from application.yml
