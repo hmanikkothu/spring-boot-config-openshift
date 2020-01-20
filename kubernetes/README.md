@@ -1,6 +1,10 @@
 
 ### deploy to k8s
 ```
+# create RBAC 
+kubectl apply -f kubernetes/sa-role-rb.yaml
+
+# create deployment 
 kubectl apply -f kubernetes/deployment.yaml
 ```
 
