@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: spring-boot-config
+    version: latest
+  name: spring-boot-config
+  namespace: spring-boot-config
+spec:
+  replicas: 1
+  selector:
+    app: spring-boot-config
+    deploymentconfig: spring-boot-config
+  template:
+    metadata:
+      labels:
+        app: spring-boot-config
+        deploymentconfig: spring-boot-config
+        version: latest
+    spec:
+      containers:
+        - image: docker.io/hmanikkothu/spring-boot-config-openshift
+          imagePullPolicy: Always
+          name: spring-boot-config-opens
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      serviceAccountName: "config-reader"

@@ -1,0 +1,57 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: spring-boot-config
+  name: spring-boot-config
+  namespace: spring-boot-config
+spec:
+  replicas: 1
+  selector:
+    app: spring-boot-config
+    deploymentconfig: spring-boot-config
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: spring-boot-config
+        deploymentconfig: spring-boot-config
+    spec:
+      containers:
+        - image: >-
+            docker.io/hmanikkothu/spring-boot-config-openshift@sha256:45a1292857a29eda2a70189a5c0c6df57a96367c495ca29664483642e3c5323f
+          imagePullPolicy: Always
+          name: spring-boot-config
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      serviceAccount: "config-reader"
+      serviceAccountName: "config-reader"
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - spring-boot-config
+        from:
+          kind: ImageStreamTag
+          name: 'spring-boot-config-opens:latest'
+          namespace: spring-boot-config
+        lastTriggeredImage: >-
+          docker.io/hmanikkothu/spring-boot-config-openshift@sha256:45a1292857a29eda2a70189a5c0c6df57a96367c495ca29664483642e3c5323f
+      type: ImageChange
