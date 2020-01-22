@@ -1,14 +1,25 @@
-### package app
+
+### deploy to k8s
 ```
-./mvnw package
+# create RBAC 
+kubectl apply -f kubernetes/sa-role-rb.yaml
+
+# create deployment 
+kubectl apply -f kubernetes/deployment.yaml
 ```
 
-### docker build
+### test
 ```
-./mvnw com.google.cloud.tools:jib-maven-plugin:dockerBuild -Dimage=hmanikkothu/spring-boot-config-k8s
+curl localhost:8080/svcmessage
+
+# output
+Hello. - Defaulte service.message from application.yml
 ```
 
-### docker push 
+### update ConfigMap to live replace the config
 ```
-docker push hmanikkothu/spring-boot-config-k8s
+kubectl edit cm spring-boot-config-k8s
+
+# update the data section with appropriate key: values
+
 ```
