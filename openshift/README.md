@@ -20,13 +20,22 @@ co create route.yml
 oc create deploymentconfig.yml
 ```
 
-#### Other useful commands
+#### Other useful commands - minishift
 
 ```
+# get cluster info/status 
+oc status
+
+# login as system admin
+oc login -u system:admin
+
+# login as normal user
+oc login -u user
+
 # make a user cluster admin 
 oc adm policy add-cluster-role-to-user cluster-admin admin
 
 # generate object from template
-oc process -f templates/default/deploymentConfig.yml --param-file params/cmi-sandbox-poc-hwxany/params.properties -o yaml
-```
+oc process -f templates/default/deploymentConfig.yml --param-file params.properties -o yaml
 
+```
