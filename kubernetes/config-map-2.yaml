@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: spring-boot-config-k8s
+  name: spring-boot-config-k8s # NOTE: The name MUST match with spring.application.name in the application.yml
 data:
   application.yml: |-
     greeting:
