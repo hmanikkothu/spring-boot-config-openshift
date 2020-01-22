@@ -1,4 +1,6 @@
-# spring-boot-config-openshift
+# Spring Boot config integration demo in OpenShift 
+
+This demo showcases Springboot externalized config integration with ConfigMap in an OpenShift environment  
 
 ## Build
 
@@ -17,10 +19,12 @@
 docker push hmanikkothu/spring-boot-config-k8s
 ```
 
-## Kubernetes depoyment
+## deploy into OpenShift 
 
-Please read the kubernentes deployment instructions here - [kubernetes instructions ](kubernetes/README.md)
+Please read the deployment instructions for OpenShift here - [openshift instructions ](openshift/README.md)
 
-## OpenShift deployment
 
-Please read the OpenShift deployment instructions here - [openshift instructions ](openshift/README.md)
+```
+The same can be deployed into a kubernetes environment as well, follow the deployment instructions here - [kubernetes instructions ](kubernetes/README.md)
+```
+
