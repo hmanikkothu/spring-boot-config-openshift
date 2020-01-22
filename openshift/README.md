@@ -1,3 +1,5 @@
+### namespace: spring-boot-config
+
 ### Create ServiceAccount, Role, RoleBinding
 ```
 oc create sa-role-rb.yml
