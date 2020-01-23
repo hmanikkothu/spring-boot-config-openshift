@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: spring-boot-config-k8s # NOTE: The name MUST match with spring.application.name in the application.yml
+  # NOTE: The 'name' MUST match with spring.application.name (default) or
+  # spring.cloud.kubernetes.config.sources[name] in the application.yml
+  name: spring-boot-config-openshift
   namespace: spring-boot-config
 data:
   application.yml: |-
